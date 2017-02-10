@@ -17,14 +17,14 @@ public class CCLogin {
     ResultSet rs;
     PreparedStatement pst;
     public CCLogin(){
-        
+        Connection conn = CCDBConnection.ConnectDB();
+
     }
     
     public boolean validateUser(JTextField un, JTextField pw) throws SQLException{
         boolean exists = false;
-        Connection conn = CCDBConnection.ConnectDB();
         
-        String sql = "Select * from tblAdmin where adminUsername = '" + un.getText() + "' AND adminPassword = '" + pw.getText() + "'";
+     /*   String sql = "Select * from tblAdmin where adminUsername = '" + un.getText() + "' AND adminPassword = '" + pw.getText() + "'";
         pst = conn.prepareStatement(sql);
         rs = pst.executeQuery();
         if(rs.next()){
@@ -34,9 +34,9 @@ public class CCLogin {
         else{
             System.out.println("Invalid details entered");
         }
-        
+    */    
         return exists;
+    
     }
-
     
 }

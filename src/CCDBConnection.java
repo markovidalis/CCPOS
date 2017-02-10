@@ -14,15 +14,19 @@ import java.sql.*;
 public class CCDBConnection {
     Connection conn = null;
     static String un, pw, hAddress;
-    public static Connection ConnectDB(/*String usn, String psw*/) {
-        /*un = usn;
-        pw = psw;*/ 
+    public static Connection ConnectDB() {
+        
         //Use only if the database needs login details.
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://C://development//CheckCleaners//CheckCleaners//CheckCleaners.accdb"/*, un, pw*/);
+  /*          Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/CheckCleanersDB", "CCAdmin", "ccadmin");
+            System.out.println("Connected");
             return conn;
-
+*/
+   DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost\\sqlexpress;user=CCAdmin;password=ccadmin");
+                System.out.println("Connected");
+            return conn;
         } catch (Exception e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
@@ -30,5 +34,4 @@ public class CCDBConnection {
             return null;
         }
     }
-    
 }
