@@ -23,9 +23,9 @@ public class CCDBConnection {
             System.out.println("Connected");
             return conn;
 */
-   DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
-        Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost\\sqlexpress;user=CCAdmin;password=ccadmin");
-                System.out.println("Connected");
+   Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost\\sqlexpress;user=CCAdmin;password=ccadmin");
+            System.out.println("Connected");
             return conn;
         } catch (Exception e) {
             System.err.println(e.getMessage());
