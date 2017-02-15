@@ -29,7 +29,7 @@ public class CCDBConnection {
             return conn;
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); 
             System.out.println("Database connection error.");
             return null;
         }
