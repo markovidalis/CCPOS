@@ -1,3 +1,10 @@
+
+import java.awt.Font;
+import static java.lang.Thread.sleep;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +20,15 @@ public class MainPane extends javax.swing.JFrame {
     /**
      * Creates new form MainPane
      */
+
+    
     public MainPane() {
         initComponents();
+        labelDate.setFont (new Font("Calibri",0,16));
+        labelTime.setFont (new Font("Calibri",0,16));
+        getDate(); //Sets the two labels to have the correct date and time with the above font
+    
+
     }
 
     /**
@@ -31,15 +45,18 @@ public class MainPane extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnReciept = new javax.swing.JButton();
         btnDispatch = new javax.swing.JButton();
+        labelDate = new javax.swing.JLabel();
+        labelTime = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCustomers = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
         btnAddNewCustomer = new javax.swing.JButton();
-        btnDeleteCustomer = new javax.swing.JButton();
+        btnArchive = new javax.swing.JButton();
         btnViewRecDel = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -70,25 +87,38 @@ public class MainPane extends javax.swing.JFrame {
 
         btnDispatch.setText("Dispatch ");
 
+        labelDate.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(116, Short.MAX_VALUE)
-                .addComponent(btnReciept, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
-                .addComponent(btnDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnReciept, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(112, 112, 112)
+                        .addComponent(btnDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(labelDate, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                            .addComponent(labelTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(161, 161, 161)
+                .addGap(26, 26, 26)
+                .addComponent(labelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReciept, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("POS", jPanel2);
@@ -101,7 +131,7 @@ public class MainPane extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,7 +142,7 @@ public class MainPane extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCustomers);
 
         searchField.setText("Search...");
         searchField.addActionListener(new java.awt.event.ActionListener() {
@@ -128,11 +158,18 @@ public class MainPane extends javax.swing.JFrame {
             }
         });
 
-        btnDeleteCustomer.setText("Delete Selected Customer");
+        btnArchive.setText("Archive Customer");
+        btnArchive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArchiveActionPerformed(evt);
+            }
+        });
 
-        btnViewRecDel.setText("View Recently Deleted Customers");
+        btnViewRecDel.setText("Archives");
 
         jButton1.setText("Search");
+
+        jButton2.setText("Edit Customer");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,13 +186,15 @@ public class MainPane extends javax.swing.JFrame {
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 338, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAddNewCustomer)
-                        .addGap(90, 90, 90)
-                        .addComponent(btnDeleteCustomer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                        .addComponent(btnViewRecDel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnArchive)
+                        .addGap(79, 79, 79)
+                        .addComponent(btnViewRecDel)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButton2)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,13 +204,14 @@ public class MainPane extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddNewCustomer)
-                    .addComponent(btnDeleteCustomer)
-                    .addComponent(btnViewRecDel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                    .addComponent(btnArchive)
+                    .addComponent(btnViewRecDel)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(54, 54, 54)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -219,6 +259,11 @@ public class MainPane extends javax.swing.JFrame {
     new NewReciept().setVisible (true);        // TODO add your handling code here:
     }//GEN-LAST:event_btnRecieptActionPerformed
 
+    private void btnArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchiveActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnArchiveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,25 +295,63 @@ public class MainPane extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainPane().setVisible(true);
+                
+
             }
         });
+        
     }
+    
+        public void getDate(){  //Method to retrieve the date and time and update the respective labels
+        Thread t= new Thread(){
+            public void run(){
+                for(; ;){
+                    Calendar calenda= new GregorianCalendar ();
+                            int day= calenda.get(Calendar.DAY_OF_MONTH);
+                            int month= calenda.get(Calendar.MONTH);
+                            int year= calenda.get(Calendar.YEAR);
+                            
+                            int hour= calenda.get(Calendar.HOUR);
+                            int minute= calenda.get (Calendar.MINUTE);
+                            
+                            labelDate.setText ("DATE: "+""+day+"/"+month+"/"+year);
+                            labelTime.setText ("TIME: "+hour+":"+minute);
+                                    
+                            try{
+                                sleep(1000);
+                            }
+                            catch(Exception e){JOptionPane.showMessageDialog(null,e);
+                            }
+                            
+                            
+                            
+                }
+            }
+            
+        };
+        t.start();
+    }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewCustomer;
-    private javax.swing.JButton btnDeleteCustomer;
+    private javax.swing.JButton btnArchive;
     private javax.swing.JButton btnDispatch;
     private javax.swing.JButton btnReciept;
     private javax.swing.JButton btnViewRecDel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelDate;
+    private javax.swing.JLabel labelTime;
     private javax.swing.JTextField searchField;
+    private javax.swing.JTable tblCustomers;
     // End of variables declaration//GEN-END:variables
 }
