@@ -30,6 +30,7 @@ public class CCLogin {
         if(rs.next()){
             System.out.println("Login success");
             
+            
         }
         else{
             System.out.println("Invalid details entered");
