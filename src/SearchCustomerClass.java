@@ -15,11 +15,11 @@ import net.proteanit.sql.DbUtils;
 import java.sql.*;
 import javax.swing.JTable;
 public class SearchCustomerClass {
-    MainPane mp;
+    SearchCustomer mp;
     Connection conn;
     PreparedStatement pst;
     ResultSet rs;
-    public SearchCustomerClass(MainPane m){
+    public SearchCustomerClass(SearchCustomer m){
         mp = m;
         conn = CCDBConnection.ConnectDB();
     }
@@ -28,8 +28,11 @@ public class SearchCustomerClass {
         String searchTerm = mp.getSearchTerm();
         JTable tblR = mp.getTable();
         String sql = "Select custID AS 'ID', custName AS 'Name', custSurname AS 'Surname', custContact AS 'Contact', custEmail AS 'Email', "
-                + "custAddress1 + custAddress2 + custAddress3 AS 'Address' FROM tblCustomer";
+                + "custAddress1 AS 'Address Line 1', custAddress2  AS 'Line 2', custAddress3 AS 'Line 3' FROM tblCustomer WHERE custID Like '%" + searchTerm + "%'"
+                + "OR custName Like '%" + searchTerm + "%' OR custSurname Like '%" + searchTerm + "%' OR custContact Like '%" + searchTerm + "%'"
+                + "OR custEmail Like '%" + searchTerm + "%' OR custAddress1 Like '%" + searchTerm + "%' OR custAddress2 Like '%" + searchTerm + "%' OR custAddress3 Like '%" + searchTerm + "%'";
          try {
+             System.out.println(sql);
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             if (!rs.equals(null)) {
