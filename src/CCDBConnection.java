@@ -12,6 +12,7 @@ import java.sql.*;
  * @author Marko
  */
 public class CCDBConnection {
+    
     Connection conn = null;
     static String un, pw, hAddress;
     public static Connection ConnectDB() {
