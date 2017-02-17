@@ -425,7 +425,7 @@ public class MainPane extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        SearchCustomer2 sc = new SearchCustomer2();
+        SearchCustomer sc = new SearchCustomer();
         sc.setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
