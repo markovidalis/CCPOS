@@ -1,6 +1,12 @@
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import net.proteanit.sql.DbUtils;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +18,9 @@ import javax.swing.JTable;
  * @author Marko
  */
 public class SearchCustomer extends javax.swing.JFrame {
-
+    Connection  conn=null;
+    ResultSet rs=null;
+    PreparedStatement pst= null;
     /**
      * Creates new form SearchCustomer
      */
@@ -26,6 +34,38 @@ public class SearchCustomer extends javax.swing.JFrame {
 
         mp = m;
     }
+   
+  /*  public void Update(){
+        try {
+            String sql= "SELECT *FROM tblCustomer order by custID"; //ordered by type, so that users can shop in an efficient manner
+            pst= conn.prepareStatement(sql);
+            rs= pst.executeQuery();
+                tblCustomers.setModel(DbUtils.resultSetToTableModel(rs));
+
+                tblCustomers.setAutoCreateRowSorter(true);
+                tblCustomers.getColumnModel().getColumn(0).setWidth(70);
+                tblCustomers.getColumnModel().getColumn(1).setWidth(300);
+                tblCustomers.getColumnModel().getColumn(2).setWidth(300);
+                tblCustomers.getColumnModel().getColumn(3).setWidth(150);
+                tblCustomers.getColumnModel().getColumn(4).setWidth(500);            }
+            catch (SQLException e){
+                  JOptionPane.showMessageDialog (null, "ERROR: "+e);
+            }
+             finally {
+                  try
+                  {
+                        rs.close();
+                        pst.close();
+                        
+                  }
+                  catch (Exception e)
+                  {
+                        JOptionPane.showMessageDialog (null, e);
+                  }
+            }
+    }
+    */
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +86,7 @@ public class SearchCustomer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +157,13 @@ public class SearchCustomer extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCustomers);
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,8 +191,13 @@ public class SearchCustomer extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(269, 269, 269))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(269, 269, 269))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(355, 355, 355))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +217,9 @@ public class SearchCustomer extends javax.swing.JFrame {
                     .addComponent(btnNewReceipt))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBack)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,11 +241,18 @@ public class SearchCustomer extends javax.swing.JFrame {
 
     private void btnArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchiveActionPerformed
         // TODO add your handling code here:
+             int row= tblCustomers.getSelectedRow ();
+             String id= tblCustomers.getModel().getValueAt(row,0).toString();//Gets the barcode of the record that the user has clicked on
+             Archive a= new Archive (id);
+             
+
+         
     }//GEN-LAST:event_btnArchiveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         SearchCustomerClass scc = new SearchCustomerClass(this);
         scc.search();
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     public String getSearchTerm() {
@@ -224,6 +286,11 @@ public class SearchCustomer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select an existing customer in the table below!");
         }
     }//GEN-LAST:event_btnNewReceiptActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +330,7 @@ public class SearchCustomer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewCustomer;
     private javax.swing.JButton btnArchive;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNewReceipt;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnViewRecDel;

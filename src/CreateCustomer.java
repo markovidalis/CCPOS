@@ -242,6 +242,7 @@ public class CreateCustomer extends javax.swing.JFrame {
         boolean created = cc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
+            this.setVisible(false);
         } else {
             
         }

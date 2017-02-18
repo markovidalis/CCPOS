@@ -32,7 +32,7 @@ public class SearchCustomerClass {
                 + "OR custName Like '%" + searchTerm + "%' OR custSurname Like '%" + searchTerm + "%' OR custContact Like '%" + searchTerm + "%'"
                 + "OR custEmail Like '%" + searchTerm + "%' OR custAddress1 Like '%" + searchTerm + "%' OR custAddress2 Like '%" + searchTerm + "%' OR custAddress3 Like '%" + searchTerm + "%'";
          try {
-             System.out.println(sql);
+            System.out.println(sql);
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             if (!rs.equals(null)) {
