@@ -212,9 +212,14 @@ public class SearchCustomer extends javax.swing.JFrame {
             String custAddress1 = tblCustomers.getValueAt(rowVal, 5).toString();
             String custAddress2 = tblCustomers.getValueAt(rowVal, 6).toString();
             String custAddress3 = tblCustomers.getValueAt(rowVal, 7).toString();
-
+            if (mp != null){
             mp.populateCustomerDetails(custID, custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3);
             this.setVisible(false);
+            } else {
+                MainPane m = new MainPane();
+                m.populateCustomerDetails(custID, custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3);
+                this.setVisible(false);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Please select an existing customer in the table below!");
         }
