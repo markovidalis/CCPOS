@@ -248,6 +248,7 @@ public class CreateCustomer extends javax.swing.JFrame {
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
             sc.updateTblCustomers();
+            this.setVisible(false);
 
         } else {
             

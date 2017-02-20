@@ -1,5 +1,5 @@
-CREATE TABLE tblArchiveCustomer (
-	archCustID int NOT NULL IDENTITY (1,1),
+CREATE TABLE tblAdmin (
+	adminUsername int NOT NULL IDENTITY (1,1),
 	archCustName VARCHAR(250) NOT NULL,
 	archCustSurname VARCHAR(250) NOT NULL,
 	archCustContact VARCHAR(250) NOT NULL,

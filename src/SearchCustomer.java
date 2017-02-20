@@ -20,7 +20,7 @@ public class SearchCustomer extends javax.swing.JFrame {
      */ResultSet rs = null;
     public SearchCustomer() {
         initComponents();
-               updateTblCustomers();
+        updateTblCustomers();
 
     }
     MainPane mp;
@@ -34,7 +34,7 @@ public class SearchCustomer extends javax.swing.JFrame {
     public void updateTblCustomers(){
          Update up = new Update("tblCustomer");
          rs = up.updateTable();
-        tblCustomers.setModel(DbUtils.resultSetToTableModel(rs));
+         tblCustomers.setModel(DbUtils.resultSetToTableModel(rs));
     }
 
     /**
@@ -93,6 +93,11 @@ public class SearchCustomer extends javax.swing.JFrame {
 
         btnViewRecDel.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnViewRecDel.setText("Archives");
+        btnViewRecDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewRecDelActionPerformed(evt);
+            }
+        });
 
         btnSearch.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnSearch.setText("Search");
@@ -241,6 +246,11 @@ public class SearchCustomer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select an existing customer in the table below!");
         }
     }//GEN-LAST:event_btnNewReceiptActionPerformed
+
+    private void btnViewRecDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecDelActionPerformed
+        // TODO add your handling code here:
+        new ArchiveViewer().setVisible(true);
+    }//GEN-LAST:event_btnViewRecDelActionPerformed
 
     /**
      * @param args the command line arguments

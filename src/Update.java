@@ -24,7 +24,7 @@ public class Update {
     
     public ResultSet updateTable(){
         try {
-            String sql = "Select * from " + tblName + " ORDER BY custID DESC";
+            String sql = "Select * from " + tblName;
             System.out.println(sql);
             conn = CCDBConnection.ConnectDB();
             pst = conn.prepareStatement(sql);
