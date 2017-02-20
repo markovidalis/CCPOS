@@ -19,6 +19,11 @@ public class CreateCustomer extends javax.swing.JFrame {
     public CreateCustomer() {
         initComponents();
     }
+    SearchCustomer sc;
+     public CreateCustomer(SearchCustomer s) {
+        initComponents();
+        sc = s;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -242,7 +247,8 @@ public class CreateCustomer extends javax.swing.JFrame {
         boolean created = cc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
-            this.setVisible(false);
+            sc.updateTblCustomers();
+
         } else {
             
         }
@@ -250,6 +256,7 @@ public class CreateCustomer extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.setVisible(false);
+        sc.updateTblCustomers();
 
     }//GEN-LAST:event_btnCancelActionPerformed
 
