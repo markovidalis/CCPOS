@@ -12,19 +12,19 @@
 import java.sql.*;
 import javax.swing.*;
 
-public class Update {
+public class UpdateSearch {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     private String tblName;
     
-    public Update(String tbl){
+    public UpdateSearch(String tbl){
         tblName = tbl;
     }
     
     public ResultSet updateTable(){
         try {
-            String sql = "Select * from " + tblName;
+            String sql = "Select * from " + tblName +" WHERE CustArchive = 'F' ORDER BY custID DESC";
             System.out.println(sql);
             conn = CCDBConnection.ConnectDB();
             pst = conn.prepareStatement(sql);

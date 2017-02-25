@@ -28,16 +28,15 @@ public class SearchCustomerClass {
         String searchTerm = mp.getSearchTerm();
         JTable tblR = mp.getTable();
         String sql = "Select custID AS 'ID', custName AS 'Name', custSurname AS 'Surname', custContact AS 'Contact', custEmail AS 'Email', "
-                + "custAddress1 AS 'Address Line 1', custAddress2  AS 'Line 2', custAddress3 AS 'Line 3' FROM tblCustomer WHERE custID Like '%" + searchTerm + "%'"
+                + "custAddress1 AS 'Address Line 1', custAddress2  AS 'Line 2', custAddress3 AS 'Line 3' FROM tblCustomer WHERE custArchive = 'F' AND (custID Like '%" + searchTerm + "%'"
                 + "OR custName Like '%" + searchTerm + "%' OR custSurname Like '%" + searchTerm + "%' OR custContact Like '%" + searchTerm + "%'"
-                + "OR custEmail Like '%" + searchTerm + "%' OR custAddress1 Like '%" + searchTerm + "%' OR custAddress2 Like '%" + searchTerm + "%' OR custAddress3 Like '%" + searchTerm + "%'";
+                + "OR custEmail Like '%" + searchTerm + "%' OR custAddress1 Like '%" + searchTerm + "%' OR custAddress2 Like '%" + searchTerm + "%' OR custAddress3 Like '%" + searchTerm + "%')";
          try {
              System.out.println(sql);
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             if (!rs.equals(null)) {
                 tblR.setModel(DbUtils.resultSetToTableModel(rs));
-
                 tblR.setAutoCreateRowSorter(true);
                 tblR.getColumnModel().getColumn(0).setWidth(70);
                 tblR.getColumnModel().getColumn(1).setWidth(300);

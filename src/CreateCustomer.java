@@ -24,7 +24,8 @@ public class CreateCustomer extends javax.swing.JFrame {
         initComponents();
         sc = s;
     }
-
+   
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,7 +248,9 @@ public class CreateCustomer extends javax.swing.JFrame {
         boolean created = cc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
-            sc.updateTblCustomers();
+            if(sc!=null){
+                sc.updateTblCustomers();
+            }
             this.setVisible(false);
 
         } else {

@@ -23,7 +23,8 @@ public class ArchiveCustomer {
     
     public void archiveCust(){
         conn = CCDBConnection.ConnectDB();
-        String sql= "INSERT INTO tblArchiveCustomer (archCustName, archCustSurname,archCustContact, archCustEmail, archCustAddress1, archCustAddress2, archCustAddress3) SELECT custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3 FROM tblCustomer WHERE custId="+custID+". DELETE FROM tblCustomer WHERE custID="+custID;
+        //String sql= "INSERT INTO tblArchiveCustomer (archCustName, archCustSurname,archCustContact, archCustEmail, archCustAddress1, archCustAddress2, archCustAddress3) SELECT custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3 FROM tblCustomer WHERE custId="+custID+". DELETE FROM tblCustomer WHERE custID="+custID;
+        String sql= "UPDATE tblCustomer SET custArchive = 'T' WHERE custID= '"+custID+"'";
         try{
             System.out.println(sql);
             pst = conn.prepareStatement(sql);

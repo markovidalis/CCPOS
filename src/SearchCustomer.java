@@ -32,7 +32,7 @@ public class SearchCustomer extends javax.swing.JFrame {
     }
     
     public void updateTblCustomers(){
-         Update up = new Update("tblCustomer");
+         UpdateSearch up = new UpdateSearch("tblCustomer");
          rs = up.updateTable();
          tblCustomers.setModel(DbUtils.resultSetToTableModel(rs));
     }
@@ -53,9 +53,11 @@ public class SearchCustomer extends javax.swing.JFrame {
         btnViewRecDel = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnNewReceipt = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
+        btnBack = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,8 +117,13 @@ public class SearchCustomer extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jButton2.setText("Edit Customer");
+        btnEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnEdit.setText("Edit Customer");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,6 +138,20 @@ public class SearchCustomer extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCustomers);
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,7 +159,11 @@ public class SearchCustomer extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRefresh)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -153,9 +178,12 @@ public class SearchCustomer extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNewReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)))
-                .addContainerGap())
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBack)
+                        .addGap(348, 348, 348))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -171,15 +199,19 @@ public class SearchCustomer extends javax.swing.JFrame {
                     .addComponent(btnAddNewCustomer)
                     .addComponent(btnArchive)
                     .addComponent(btnViewRecDel)
-                    .addComponent(jButton2))
+                    .addComponent(btnEdit))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch)
                     .addComponent(btnNewReceipt))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefresh))
+                .addGap(18, 18, 18)
+                .addComponent(btnBack)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +245,7 @@ public class SearchCustomer extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         SearchCustomerClass scc = new SearchCustomerClass(this);
         scc.search();
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     public String getSearchTerm() {
@@ -252,6 +285,35 @@ public class SearchCustomer extends javax.swing.JFrame {
         new ArchiveViewer().setVisible(true);
     }//GEN-LAST:event_btnViewRecDelActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        updateTblCustomers();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to save your edits? \n Note: This cannot be undone.", "CONFIRM?", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            EditCustomers e= new EditCustomers (this);
+            try{
+            e.sendEdits();
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null,ex);
+            }
+            
+            
+        }
+        else {
+           JOptionPane.showMessageDialog(null, "Action Cancelled");
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+   
     /**
      * @param args the command line arguments
      */
@@ -286,14 +348,20 @@ public class SearchCustomer extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JTable sendTable(){
+        return tblCustomers;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewCustomer;
     private javax.swing.JButton btnArchive;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnNewReceipt;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnViewRecDel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCustomers;

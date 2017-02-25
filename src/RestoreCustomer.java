@@ -10,26 +10,27 @@
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 public class RestoreCustomer {
     Connection  conn=null;
-    ResultSet rs=null;
-    PreparedStatement pst= null;
+    PreparedStatement pst= null; 
+    
     public RestoreCustomer(){
             conn = CCDBConnection.ConnectDB();
     }
 
     
     public void Restore(int id){
-        String sql= "INSERT INTO tblCustomer (custName, custSurname,custContact, custEmail, custAddress1, custAddress2, custAddress3) SELECT archCustName, archCustSurname, archCustContact, archCustEmail, archCustAddress1, archCustAddress2, archCustAddress3 FROM tblArchiveCustomer WHERE archCustId="+id+". DELETE FROM tblArchiveCustomer WHERE archCustID="+id;
+        //String sql= "INSERT INTO tblCustomer (custName, custSurname,custContact, custEmail, custAddress1, custAddress2, custAddress3) SELECT archCustName, archCustSurname, archCustContact, archCustEmail, archCustAddress1, archCustAddress2, archCustAddress3 FROM tblArchiveCustomer WHERE archCustId="+id+". DELETE FROM tblArchiveCustomer WHERE archCustID="+id;
+        String sql= "UPDATE tblCustomer SET custArchive= 'F' WHERE custID= '"+id+"'";
         try{
         pst = conn.prepareStatement(sql);
-        rs = pst.executeQuery(); 
-        System.out.println (rs);
+        pst.execute(); 
         JOptionPane.showMessageDialog(null, "CUSTOMER SUCCESFULLLY RESTORED.");
         }
-      catch (Exception e) {        
-    }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
     }
     
     
