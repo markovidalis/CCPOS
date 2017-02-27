@@ -24,8 +24,8 @@ public class CCDBConnection {
             System.out.println("Connected");
             return conn;
 */
-   Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;user=CCAdmin;password=ccadmin");
+   Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://169.239.181.113/checkdry_pos", "checkdry", "Q!5RGwPnbe7(");
             System.out.println("Connected");
             return conn;
         } catch (Exception e) {

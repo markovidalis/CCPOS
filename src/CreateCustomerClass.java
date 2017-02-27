@@ -24,7 +24,7 @@ public class CreateCustomerClass {
     public boolean recordCustomer() {
 
         try {
-            String sql = "INSERT INTO tblCustomer (custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3, custArchive) VALUES ('"
+            String sql = "INSERT INTO tblCustomer (CustName, CustSurname, CustContact, CustEmail, CustAddress1, CustAddress2, CustAddress3, CustArchive) VALUES ('"
                     + cc.getName() + "', '" + cc.getSurname() + "', '" + cc.getContact() + "', '" + cc.getEmail() + "', '" + cc.getAdLine1()
                     + "', '" + cc.getAdLine2() + "', '" + cc.getAdLine3() + "', 'F')";
 
@@ -33,7 +33,7 @@ public class CreateCustomerClass {
             pst.execute();
             return true;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "SQL Error");
+            JOptionPane.showMessageDialog(null, "SQL Error " + e);
             return false;
         }
     }

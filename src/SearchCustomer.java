@@ -301,7 +301,7 @@ public class SearchCustomer extends javax.swing.JFrame {
         if (reply == JOptionPane.YES_OPTION) {
             EditCustomers e= new EditCustomers (this);
             try{
-            e.sendEdits();
+            e.sendEdits(tblCustomers);
             }
             catch(Exception ex){
                 JOptionPane.showMessageDialog(null,ex);
