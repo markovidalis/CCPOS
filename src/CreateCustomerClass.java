@@ -20,6 +20,28 @@ public class CreateCustomerClass {
     public CreateCustomerClass(CreateCustomer c) {
         cc = c;
     }
+    
+    public String checkCustomerDetails(){
+        String legit= "True";
+        
+        if (cc.getName().equals(""))
+        {
+            legit= "No name entered";
+            return legit;
+            
+        }
+        else
+            if (!cc.getEmail().equals("") && (!cc.getEmail().contains("@") || !cc.getEmail().contains(".")))
+            {
+                legit="Invalid email";
+                return legit;
+    // Handle bad address
+            }
+        else {
+            return legit; 
+        }
+        
+    }
 
     public boolean recordCustomer() {
 

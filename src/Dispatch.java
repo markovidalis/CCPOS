@@ -1,3 +1,9 @@
+
+import java.awt.BorderLayout;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeException;
+import net.sourceforge.barbecue.BarcodeFactory;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +21,7 @@ public class Dispatch extends javax.swing.JFrame {
      */
     public Dispatch() {
         initComponents();
+        
     }
 
     /**
@@ -27,25 +34,37 @@ public class Dispatch extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtFieldDispatch = new javax.swing.JTextField();
+        btnDispatch = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        panelBarcode = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Order Dispatch");
 
-        jTextField1.setText("Enter order number to be dispatched");
+        txtFieldDispatch.setText("Enter order number to be dispatched");
 
-        jButton1.setText("Dispatch");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDispatch.setText("Dispatch");
+        btnDispatch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDispatchActionPerformed(evt);
             }
         });
 
         jLabel2.setText("NOTE @MARKATHESOUNDGUYMARKOUTHA: We must have a check in place here to see if the order is first completed before it can be dispatched ");
+
+        javax.swing.GroupLayout panelBarcodeLayout = new javax.swing.GroupLayout(panelBarcode);
+        panelBarcode.setLayout(panelBarcodeLayout);
+        panelBarcodeLayout.setHorizontalGroup(
+            panelBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+        panelBarcodeLayout.setVerticalGroup(
+            panelBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,12 +77,15 @@ public class Dispatch extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFieldDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1))
+                        .addComponent(btnDispatch))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addComponent(panelBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -73,9 +95,11 @@ public class Dispatch extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                    .addComponent(txtFieldDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDispatch))
+                .addGap(29, 29, 29)
+                .addComponent(panelBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(40, 40, 40))
         );
@@ -83,9 +107,20 @@ public class Dispatch extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDispatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispatchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String barcodeNumber= txtFieldDispatch.getText();
+        Barcode barcode= null;
+        
+        try {
+            barcode = BarcodeFactory.createCode128B(barcodeNumber);
+        } catch (BarcodeException e) {
+            // Error handling
+        }
+        panelBarcode.add(barcode, BorderLayout.CENTER);
+        panelBarcode.repaint();
+        
+    }//GEN-LAST:event_btnDispatchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,9 +158,10 @@ public class Dispatch extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDispatch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel panelBarcode;
+    private javax.swing.JTextField txtFieldDispatch;
     // End of variables declaration//GEN-END:variables
 }

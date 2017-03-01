@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/development/CCPOS/src/Archive.java</file>
-            <file>file:/C:/development/CCPOS/src/ArchiveViewer.java</file>
-            <file>file:/C:/development/CCPOS/src/EditCustomers.java</file>
-            <file>file:/C:/development/CCPOS/src/UpdateArchive.java</file>
-            <file>file:/C:/development/CCPOS/src/MainPane.java</file>
-            <file>file:/C:/development/CCPOS/src/SearchCustomerClass.java</file>
-            <file>file:/C:/development/CCPOS/src/CompleteOrder.java</file>
-            <file>file:/C:/development/CCPOS/src/UpdateSearch.java</file>
-            <file>file:/C:/development/CCPOS/src/Dispatch.java</file>
-            <file>file:/C:/development/CCPOS/src/ArchiveCustomer.java</file>
-            <file>file:/C:/development/CCPOS/src/RestoreCustomer.java</file>
-            <file>file:/C:/development/CCPOS/src/CreateCustomer.java</file>
-            <file>file:/C:/development/CCPOS/src/SearchCustomer.java</file>
+            <file>file:/Users/georgegeorgiades/Documents/CCPOS/src/CCDBConnection.java</file>
+            <file>file:/Users/georgegeorgiades/Documents/CCPOS/src/Dispatch.java</file>
+            <file>file:/Users/georgegeorgiades/Documents/CCPOS/src/ArchiveViewer.java</file>
+            <file>file:/Users/georgegeorgiades/Documents/CCPOS/src/CCLogin.java</file>
         </group>
     </open-files>
 </project-private>

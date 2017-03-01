@@ -31,13 +31,17 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFieldDispatch" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnDispatch" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                      <Component id="panelBarcode" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="162" max="32767" attributes="0"/>
@@ -51,10 +55,12 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtFieldDispatch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDispatch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="163" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Component id="panelBarcode" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
@@ -70,17 +76,17 @@
         <Property name="text" type="java.lang.String" value="Order Dispatch"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtFieldDispatch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enter order number to be dispatched"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnDispatch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dispatch"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDispatchActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -88,5 +94,20 @@
         <Property name="text" type="java.lang.String" value="NOTE @MARKATHESOUNDGUYMARKOUTHA: We must have a check in place here to see if the order is first completed before it can be dispatched "/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="panelBarcode">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="422" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
   </SubComponents>
 </Form>

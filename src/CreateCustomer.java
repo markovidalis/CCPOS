@@ -245,6 +245,8 @@ public class CreateCustomer extends javax.swing.JFrame {
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         CreateCustomerClass cc = new CreateCustomerClass(this);
+        String acceptableCustomer= cc.checkCustomerDetails();
+        if (acceptableCustomer.equals("True")){
         boolean created = cc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
@@ -255,6 +257,11 @@ public class CreateCustomer extends javax.swing.JFrame {
 
         } else {
             
+        }
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, acceptableCustomer);
         }
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
