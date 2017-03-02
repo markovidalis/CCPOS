@@ -1,0 +1,65 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Marko
+ */
+import java.sql.*;
+import javax.swing.*;
+
+public class CreateCustomerClassSearchPane {
+
+    CreateCustomer cc;
+    Connection conn;
+    PreparedStatement pst;
+
+    public CreateCustomerClassSearchPane(CreateCustomer c) {
+        cc = c;
+    }
+    
+    public String checkCustomerDetails(){
+        String legitCheck= "Legit";
+        
+        if (cc.getName().equals(""))
+        {
+            legitCheck= "No name entered";
+            return legitCheck;
+            
+        }
+        else
+            if (!cc.getEmail().equals("") && (!cc.getEmail().contains("@") || !cc.getEmail().contains(".")))
+            {
+                legitCheck="Invalid email";
+                return legitCheck;
+    // Handle bad address
+            }
+        else {
+            return legitCheck; 
+        }
+        
+    }
+
+    public boolean recordCustomer() {
+
+        try {
+            String sql = "INSERT INTO tblCustomer (CustName, CustSurname, CustContact, CustEmail, CustAddress1, CustAddress2, CustAddress3, CustArchive) VALUES ('"
+                    + cc.getName() + "', '" + cc.getSurname() + "', '" + cc.getContact() + "', '" + cc.getEmail() + "', '" + cc.getAdLine1()
+                    + "', '" + cc.getAdLine2() + "', '" + cc.getAdLine3() + "', 'F')";
+
+            conn = CCDBConnection.ConnectDB();
+            pst = conn.prepareStatement(sql);
+            pst.execute();
+            return true;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "SQL Error " + e);
+            return false;
+        }
+    }
+    
+    
+
+}

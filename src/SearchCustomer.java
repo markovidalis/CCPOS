@@ -118,7 +118,7 @@ public class SearchCustomer extends javax.swing.JFrame {
         });
 
         btnEdit.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnEdit.setText("Save Changes to Table");
+        btnEdit.setText("Edit Customer");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -175,11 +175,11 @@ public class SearchCustomer extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnViewRecDel, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNewReceipt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(31, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNewReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnBack)
@@ -257,6 +257,7 @@ public class SearchCustomer extends javax.swing.JFrame {
     }
     private void btnNewReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewReceiptActionPerformed
         int rowVal = tblCustomers.getSelectedRow();
+        System.out.print("rowVal= "+rowVal);
         if (rowVal != -1) {
 
             int custID = (int) tblCustomers.getValueAt(rowVal, 0);
@@ -279,7 +280,10 @@ public class SearchCustomer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select an existing customer in the table below!");
         }
     }//GEN-LAST:event_btnNewReceiptActionPerformed
-
+    
+    
+     
+    
     private void btnViewRecDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecDelActionPerformed
         // TODO add your handling code here:
         new ArchiveViewer().setVisible(true);

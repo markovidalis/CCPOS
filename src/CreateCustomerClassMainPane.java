@@ -6,39 +6,37 @@
 
 /**
  *
- * @author Marko
+ * @author georgegeorgiades
  */
 import java.sql.*;
 import javax.swing.*;
-
-public class CreateCustomerClass {
-
-    CreateCustomer cc;
+public class CreateCustomerClassMainPane {
+    MainPane mp;
     Connection conn;
     PreparedStatement pst;
 
-    public CreateCustomerClass(CreateCustomer c) {
-        cc = c;
+    public CreateCustomerClassMainPane (MainPane c) {
+        mp = c;
     }
     
     public String checkCustomerDetails(){
-        String legit= "True";
+        String legitCheck= "Legit";
         
-        if (cc.getName().equals(""))
+        if (mp.getName().equals(""))
         {
-            legit= "No name entered";
-            return legit;
+            legitCheck= "No name entered";
+            return legitCheck;
             
         }
         else
-            if (!cc.getEmail().equals("") && (!cc.getEmail().contains("@") || !cc.getEmail().contains(".")))
+            if (!mp.getEmail().equals("") && (!mp.getEmail().contains("@") || !mp.getEmail().contains(".")))
             {
-                legit="Invalid email";
-                return legit;
+                legitCheck="Invalid email";
+                return legitCheck;
     // Handle bad address
             }
         else {
-            return legit; 
+            return legitCheck; 
         }
         
     }
@@ -47,8 +45,8 @@ public class CreateCustomerClass {
 
         try {
             String sql = "INSERT INTO tblCustomer (CustName, CustSurname, CustContact, CustEmail, CustAddress1, CustAddress2, CustAddress3, CustArchive) VALUES ('"
-                    + cc.getName() + "', '" + cc.getSurname() + "', '" + cc.getContact() + "', '" + cc.getEmail() + "', '" + cc.getAdLine1()
-                    + "', '" + cc.getAdLine2() + "', '" + cc.getAdLine3() + "', 'F')";
+                    + mp.getName() + "', '" + mp.getSurname() + "', '" + mp.getContact() + "', '" + mp.getEmail() + "', '" + mp.getAdLine1()
+                    + "', '" + mp.getAdLine2() + "', '" + mp.getAdLine3() + "', 'F')";
 
             conn = CCDBConnection.ConnectDB();
             pst = conn.prepareStatement(sql);
@@ -59,5 +57,5 @@ public class CreateCustomerClass {
             return false;
         }
     }
-
+    
 }

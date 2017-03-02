@@ -13,63 +13,54 @@ import javax.swing.table.*;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Marko
  */
 public final class NewReceiptClass {
-    Object [][] data;
+
+    Object[][] data;
     MainPane nr;
     Connection conn;
     ResultSet rs;
     PreparedStatement pst;
     JTable tblCon;
-    String [] columnNames = {"Qty", "Description", "Department", "Item Type", "Unit Price", "Total Price"};
-    
-    public NewReceiptClass(MainPane n){
+    String[] columnNames = {"Qty", "Description", "Department", "Item Type", "Unit Price", "Total Price"};
+    JComboBox cmbDept, cmbItem;
+    String[][] dept;
+
+    public NewReceiptClass(MainPane n, JComboBox cmbD, JComboBox cmbI) {
         nr = n;
         conn = CCDBConnection.ConnectDB();
         tblCon = n.getTable();
-        data = new Object [1][4];
+        data = new Object[1][4];
+        cmbDept = cmbD;
         tblCon.setModel(new DefaultTableModel(data, columnNames));
-
         FillComboBoxDepartment();
+        cmbItem = cmbI;
     }
-    
-    public void setCmbDept(JTable tblItems){
-        
-    }
-    
-    public void FillComboBoxItemType(){
-        JTable tblCon = nr.getTable();
-        int row = tblCon.getSelectedRow();
-        
-        String sql = "SELECT * from tblDryCleanPrices";
-        int size = 0;
+
+    public void FillComboBoxItemType() {
+        String deptName = cmbDept.getSelectedItem().toString();
         int count = 0;
+        while (!dept[count][1].equals(deptName)) {
+            count++;
+        }
+        String deptID = dept[count][0];
         try {
+            String sql = "select * from tblDeptItems WHERE deptID = " + deptID;
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
-            List<String> list = new ArrayList<>();
-            while (rs.next()) {//adds each item to the list for the combo box
-                list.add(rs.getString("dryCleanName"));
+            while (rs.next()) {
+                cmbItem.addItem(rs.getString("deptItemName"));
             }
-            count = list.size();
-            String[] items = list.toArray(new String[list.size()]);
-            JComboBox<String> jcb = new JComboBox<>(items);
-           // TableColumn tc = tblCon.getColumnModel().getColumn(3);
-            TableCellRenderer tcr;
-            TableCellEditor tce = new DefaultCellEditor(jcb);//adds the combo box to the relevant cell in the table.
-            //tc.setCellEditor(tce);
             
-            tblCon.setValueAt(jcb, row, 3);
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
         }
     }
-    
-    public void updateColumns() {
+
+    /*  public void updateColumns() {
 
         for (int k = 0; k < data.length; k++) {
             for (int i = 0; i < 2; i++) {
@@ -87,9 +78,9 @@ public final class NewReceiptClass {
                             data[k][2] = rs.getString("dryCleanName");
 
                             //double total1 = Double.parseDouble((String) data[k][2]) * Integer.parseInt((String) data[k][0]);
-                           // data[k][3] = total1;
+                            // data[k][3] = total1;
                             if (!data[k][2].equals(0) && k == data.length - 1) {
-                              //  updateTotal();
+                                //  updateTotal();
                                 tblCon.setModel(new DefaultTableModel(data, columnNames));
                             } else {
                             }
@@ -105,7 +96,7 @@ public final class NewReceiptClass {
             }
         }
     }
-    
+     */
     public void FillComboBoxDepartment() {
 
         String sql = "SELECT * from tblDepartment ORDER BY deptName";
@@ -114,19 +105,24 @@ public final class NewReceiptClass {
         try {
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
-            List<String> list = new ArrayList<>();
+            dept = new String [10][2];
             while (rs.next()) {//adds each item to the list for the combo box
-                list.add(rs.getString("deptName"));
+                dept[count][0] = rs.getString("deptID");
+                dept[count][1] = rs.getString("deptName");
+                cmbDept.addItem(dept[count][1]);
+                count++;
             }
-            count = list.size();
-            String[] items = list.toArray(new String[list.size()]);
+
+            //count = list.size();
+/*            String[] items = list.toArray(new String[list.size()]);
             JComboBox<String> jcb = new JComboBox<>(items);
             TableColumn tc = tblCon.getColumnModel().getColumn(2);
             TableCellEditor tce = new DefaultCellEditor(jcb);//adds the combo box to the relevant cell in the table.
             tc.setCellEditor(tce);
+             */
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
 }

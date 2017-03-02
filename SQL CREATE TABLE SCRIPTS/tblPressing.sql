@@ -1,0 +1,1 @@
+INSERT INTO tblPressing(pressname, pressprice) values ('Overlay', 10)

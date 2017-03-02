@@ -1,0 +1,1 @@
+INSERT INTO tblDepartment(deptName) VALUES ('Ironing')
