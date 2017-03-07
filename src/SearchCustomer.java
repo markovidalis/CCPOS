@@ -30,7 +30,9 @@ public class SearchCustomer extends javax.swing.JFrame {
         mp = m;
        updateTblCustomers();
     }
-    
+    public void hideNewRecieptButton(){
+        btnNewReceipt.setVisible(false);
+    }
     public void updateTblCustomers(){
          UpdateSearch up = new UpdateSearch("tblCustomer");
          rs = up.updateTable();

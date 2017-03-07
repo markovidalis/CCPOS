@@ -16,6 +16,7 @@ public class CreateCustomerClassSearchPane {
     CreateCustomer cc;
     Connection conn;
     PreparedStatement pst;
+    String num;
 
     public CreateCustomerClassSearchPane(CreateCustomer c) {
         cc = c;
@@ -23,6 +24,14 @@ public class CreateCustomerClassSearchPane {
     
     public String checkCustomerDetails(){
         String legitCheck= "Legit";
+        String cellNum= cc.getContact();
+        String regexStr = "^[0-9]{10}$";
+        
+        if (!(cellNum.length()==10 && cellNum.charAt(0)=='0' && cellNum.matches(regexStr))){
+            legitCheck= "Invalid contact number. \nEnsure that the number contains a '0' and is ten digits long";
+            return legitCheck;
+        }
+
         
         if (cc.getName().equals(""))
         {
@@ -37,17 +46,20 @@ public class CreateCustomerClassSearchPane {
                 return legitCheck;
     // Handle bad address
             }
+            
         else {
             return legitCheck; 
         }
         
     }
-
+    public void updateNumer(String n){
+        num=n;
+    }
     public boolean recordCustomer() {
 
         try {
             String sql = "INSERT INTO tblCustomer (CustName, CustSurname, CustContact, CustEmail, CustAddress1, CustAddress2, CustAddress3, CustArchive) VALUES ('"
-                    + cc.getName() + "', '" + cc.getSurname() + "', '" + cc.getContact() + "', '" + cc.getEmail() + "', '" + cc.getAdLine1()
+                    + cc.getName() + "', '" + cc.getSurname() + "', '" + num + "', '" + cc.getEmail() + "', '" + cc.getAdLine1()
                     + "', '" + cc.getAdLine2() + "', '" + cc.getAdLine3() + "', 'F')";
 
             conn = CCDBConnection.ConnectDB();

@@ -257,7 +257,16 @@ public class CreateCustomer extends javax.swing.JFrame {
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         CreateCustomerClassSearchPane ccc = new CreateCustomerClassSearchPane(this);
         String acceptableCustomer= ccc.checkCustomerDetails();
+        
         if (acceptableCustomer.equals("Legit")){
+         String cellNum= getContact();
+         
+            StringBuilder build= new StringBuilder (cellNum);
+            build.deleteCharAt(0);
+            cellNum= build.toString();
+            cellNum= "+27"+cellNum;
+            
+            ccc.updateNumer(cellNum);
         boolean created = ccc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
