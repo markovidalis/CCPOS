@@ -39,7 +39,7 @@ public class CreateCustomerClassSearchPane {
             return legitCheck;
             
         }
-        else
+       
             if (!cc.getEmail().equals("") && (!cc.getEmail().contains("@") || !cc.getEmail().contains(".")))
             {
                 legitCheck="Invalid email";

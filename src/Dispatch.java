@@ -19,6 +19,8 @@ import net.sourceforge.barbecue.BarcodeFactory;
 public class Dispatch extends javax.swing.JFrame {
     Connection conn;
     PreparedStatement pst;
+    String barcodeNum;
+    ResultSet rs;
     
     /**
      * Creates new form Dispatch
@@ -129,7 +131,7 @@ public class Dispatch extends javax.swing.JFrame {
 
     private void btnDispatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispatchActionPerformed
 
-        String barcodeNum = txtFieldDispatch.getText();
+        barcodeNum = txtFieldDispatch.getText();
         String status = "Dispatched";
         updateOrderStatus(barcodeNum, status);
 // TODO add your handling code here:
@@ -149,14 +151,33 @@ public class Dispatch extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDispatchActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String barcodeNum = txtFieldDispatch.getText();
+        barcodeNum = txtFieldDispatch.getText();
         String status = "Ready for dispatch";
         updateOrderStatus(barcodeNum, status);
+        try {
+            String deliveryStatus= getDelivery(barcodeNum);
+        } catch (SQLException ex) {
+            Logger.getLogger(Dispatch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public String getDelivery(String bar) throws SQLException{
+        String sql="SELECT delivery FROM tblReceipt WHERE barcodeNumber ="+bar;
+        conn=CCDBConnection.ConnectDB();
+        pst=conn.prepareStatement(sql);
+        rs =pst.executeQuery();
+        rs.next();
+        System.out.println(rs.getString(1));
+        return rs.getString(1);        
+        
+        
+        
+        
+    }
     public void updateOrderStatus(String barcodeNum, String status) {
         try {
-            String sql = "Update tblReceipt SET receiptStatus = '" + status + "' WHERE barcodeNumber = " + barcodeNum;
+            String sql = "Update tblReceipt SET receiptStatus = '" + status + "' WHERE barcodeNumber =" + barcodeNum;
             conn = CCDBConnection.ConnectDB();
             pst = conn.prepareStatement(sql);
             pst.execute();

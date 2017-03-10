@@ -80,6 +80,7 @@ public final class MainPane extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -123,7 +124,7 @@ public final class MainPane extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNotes = new javax.swing.JTextArea();
         jLabel22 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnRecordReciept = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         chkDelivery = new javax.swing.JCheckBox();
@@ -298,38 +299,45 @@ public final class MainPane extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addContainerGap()
                 .addComponent(jButton2)
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addContainerGap(610, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(46, 46, 46)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
+
+        jButton5.setText("Administrator Functions");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(205, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(343, 343, 343)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,8 +346,10 @@ public final class MainPane extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(19, 19, 19)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -529,6 +539,11 @@ public final class MainPane extends javax.swing.JFrame {
                 txtQtyFocusLost(evt);
             }
         });
+        txtQty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQtyActionPerformed(evt);
+            }
+        });
 
         txtDesc.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
 
@@ -644,10 +659,10 @@ public final class MainPane extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton5.setText("Record Receipt");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnRecordReciept.setText("Record Receipt");
+        btnRecordReciept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnRecordRecieptActionPerformed(evt);
             }
         });
 
@@ -685,7 +700,7 @@ public final class MainPane extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(chkDelivery)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addComponent(jLabel25)
                         .addGap(34, 34, 34)
                         .addComponent(cmbPaymentMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -694,7 +709,7 @@ public final class MainPane extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRecordReciept, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -709,7 +724,7 @@ public final class MainPane extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chkDelivery)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRecordReciept, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
                     .addComponent(cmbPaymentMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -723,7 +738,10 @@ public final class MainPane extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabNewReceipt, javax.swing.GroupLayout.DEFAULT_SIZE, 1037, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tabNewReceipt)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,19 +753,99 @@ public final class MainPane extends javax.swing.JFrame {
 
     public JTable getTable() {
         return tblItems;
-    }
+    }    
+    
+    private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
+        new CreateCustomer().setVisible(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddCustomerActionPerformed
+
+    private void chkDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDeliveryActionPerformed
+        if (chkDelivery.isSelected()) {
+            lblTotal.setText((Double.parseDouble(lblTotal.getText()) + 40) + "");
+        } else if (!chkDelivery.isSelected()) {
+            lblTotal.setText((Double.parseDouble(lblTotal.getText()) - 40) + "");
+
+        }
+    }//GEN-LAST:event_chkDeliveryActionPerformed
+
+    private void btnRecordRecieptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecordRecieptActionPerformed
+        System.out.print(lblID.getText());
+        if (lblID.getText().equals("-")){
+            JOptionPane.showMessageDialog(null,"Error completing reciept\nNo customer has been selected");
+        }
+        else if (tblItems.getValueAt(0,0)==null)
+        {
+            JOptionPane.showMessageDialog(null,"Error completing reciept\nNo items have been added");
+
+        }
+        else{
+
+            try {
+                nrc.recordOrder();
+            } catch (IOException ex) {
+                Logger.getLogger(MainPane.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnRecordRecieptActionPerformed
+
+    private void cmbItemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbItemItemStateChanged
+        try {
+            if (!cmbItem.getSelectedItem().toString().equals("")) {
+                nrc.populateItemPrice(txtUnitP, cmbItem.getSelectedItem().toString());
+                nrc.calculateTotalPrice(txtQty, txtUnitP, txtTotalP);
+            }
+        } catch (NullPointerException npe) {
+            System.out.println("Null pointer exception thrown");
+        }
+    }//GEN-LAST:event_cmbItemItemStateChanged
+
+    private void cmbDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeptItemStateChanged
+        if (!cmbDept.getSelectedItem().toString().equals("") && cmbDept.getSelectedItem() != null) {
+            nrc.FillComboBoxItemType();
+            System.out.println("ComboBoxFilled");
+        }
+    }//GEN-LAST:event_cmbDeptItemStateChanged
+
+    private void txtQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQtyActionPerformed
+
+    private void txtQtyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtyFocusLost
+        if (!txtQty.getText().equals("") && !txtUnitP.getText().equals("")) {
+            nrc.calculateTotalPrice(txtQty, txtUnitP, txtTotalP);
+        }
+    }//GEN-LAST:event_txtQtyFocusLost
+
+    private void btnAddItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItem2ActionPerformed
+
+        nrc.addItemToTable(txtQty, txtDesc, txtUnitP, txtTotalP, txtNotes);
+        updateLblTotal();
+
+    }//GEN-LAST:event_btnAddItem2ActionPerformed
+
+    private void btnSearchCustomer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomer2ActionPerformed
+        SearchCustomer sc = new SearchCustomer(this);
+        sc.setVisible(true);
+    }//GEN-LAST:event_btnSearchCustomer2ActionPerformed
+
+    private void btnAddCustomer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomer2ActionPerformed
+        new CreateCustomer().setVisible(true);  // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddCustomer2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        InsertItemDatabase iid = new InsertItemDatabase();
+        iid.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnViewRecDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecDelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnViewRecDelActionPerformed
+
     private void btnAddNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCustomerActionPerformed
 
         new CreateCustomer().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddNewCustomerActionPerformed
-
-    private void btnArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchiveActionPerformed
-        // TODO add your handling code here:
-        ArchiveViewer av = new ArchiveViewer();
-        av.setVisible(true);
-
-    }//GEN-LAST:event_btnArchiveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
@@ -756,23 +854,15 @@ public final class MainPane extends javax.swing.JFrame {
         sc.setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        new CreateCustomer().setVisible(true);  // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddCustomerActionPerformed
+    private void btnArchiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArchiveActionPerformed
+        // TODO add your handling code here:
+        ArchiveViewer av = new ArchiveViewer();
+        av.setVisible(true);
+    }//GEN-LAST:event_btnArchiveActionPerformed
 
-    private void btnAddCustomer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomer2ActionPerformed
-        new CreateCustomer().setVisible(true);  // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddCustomer2ActionPerformed
-
-    private void btnSearchCustomer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomer2ActionPerformed
-        SearchCustomer sc = new SearchCustomer(this);
-        sc.setVisible(true);
-    }//GEN-LAST:event_btnSearchCustomer2ActionPerformed
-
-    private void btnAddItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItem2ActionPerformed
-        nrc.addItemToTable(txtQty, txtDesc, txtUnitP, txtTotalP, txtNotes);
-        updateLblTotal();
-    }//GEN-LAST:event_btnAddItem2ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+     new AdminWindow().setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public String getPaymentMethod() {
         return cmbPaymentMethod.getSelectedItem().toString();
@@ -799,59 +889,9 @@ public final class MainPane extends javax.swing.JFrame {
         }
         lblTotal.setText(sum + "");
     }
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InsertItemDatabase iid = new InsertItemDatabase();
-        iid.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void cmbDeptItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDeptItemStateChanged
-        if (!cmbDept.getSelectedItem().toString().equals("") && cmbDept.getSelectedItem() != null) {
-            nrc.FillComboBoxItemType();
-            System.out.println("ComboBoxFilled");
-        }
-    }//GEN-LAST:event_cmbDeptItemStateChanged
-
-    private void cmbItemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbItemItemStateChanged
-        try {
-            if (!cmbItem.getSelectedItem().toString().equals("")) {
-                nrc.populateItemPrice(txtUnitP, cmbItem.getSelectedItem().toString());
-                nrc.calculateTotalPrice(txtQty, txtUnitP, txtTotalP);
-            }
-        } catch (NullPointerException npe) {
-            System.out.println("Null pointer exception thrown");
-        }
-    }//GEN-LAST:event_cmbItemItemStateChanged
-
     public String getCustomerID() {
         return lblID.getText();
     }
-
-    private void txtQtyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtQtyFocusLost
-        if (!txtQty.getText().equals("") && !txtUnitP.getText().equals("")) {
-            nrc.calculateTotalPrice(txtQty, txtUnitP, txtTotalP);
-        }
-    }//GEN-LAST:event_txtQtyFocusLost
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-            nrc.recordOrder();
-        } catch (IOException ex) {
-            Logger.getLogger(MainPane.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void chkDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDeliveryActionPerformed
-        if (chkDelivery.isSelected()) {
-            lblTotal.setText((Double.parseDouble(lblTotal.getText()) + 40) + "");
-        } else if (!chkDelivery.isSelected()) {
-            lblTotal.setText((Double.parseDouble(lblTotal.getText()) - 40) + "");
-
-        }
-    }//GEN-LAST:event_chkDeliveryActionPerformed
-
-    private void btnViewRecDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecDelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewRecDelActionPerformed
 
     public void populateCustomerDetails(int id, String name, String surname, String contact, String email, String add1, String add2, String add3) {
         lblID.setText(id + "");
@@ -951,6 +991,7 @@ public final class MainPane extends javax.swing.JFrame {
     private javax.swing.JButton btnAddItem2;
     private javax.swing.JButton btnAddNewCustomer;
     private javax.swing.JButton btnArchive;
+    private javax.swing.JButton btnRecordReciept;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchCustomer;
     private javax.swing.JButton btnSearchCustomer2;

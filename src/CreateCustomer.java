@@ -24,6 +24,7 @@ public class CreateCustomer extends javax.swing.JFrame {
     Boolean lastPaneWasReceiptPane;
 
      public CreateCustomer(SearchCustomer s) {
+
         initComponents();
         sc = s;
         lastPaneWasReceiptPane=false;
