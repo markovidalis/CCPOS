@@ -26,8 +26,9 @@ public class EditCustomers {
         
     }
     
-    public void sendEdits(JTable tblName) throws SQLException{
+    public void sendEdits() throws SQLException{
         boolean flag = false;
+        JTable tblName= sc.getTable();
         int custID = Integer.parseInt(tblName.getValueAt(0,0) + "");
 
         for(int i = 0; i < tblName.getRowCount(); i++){
@@ -37,7 +38,6 @@ public class EditCustomers {
                     +"', CustAddress1 = '" + tblName.getValueAt(i, 5) + "', CustAddress2 = '" + tblName.getValueAt(i, 6) + "', CustAddress3 = '"
                     + tblName.getValueAt(i,7) + "' Where CustID = '" + tblName.getValueAt(i, 0) + "'";
             if(i == 0){
-                
                 pst = conn.prepareStatement(sql1);
                     pst.execute(); 
             }

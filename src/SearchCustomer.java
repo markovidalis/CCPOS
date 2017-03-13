@@ -24,15 +24,18 @@ public class SearchCustomer extends javax.swing.JFrame {
 
     }
     MainPane mp;
-
+    EditReceipt e;
     public SearchCustomer(MainPane m) {
         initComponents();
         mp = m;
        updateTblCustomers();
     }
-    public void hideNewRecieptButton(){
-        btnNewReceipt.setVisible(false);
+    public SearchCustomer(EditReceipt er) {
+        initComponents();
+        e = er;
+       updateTblCustomers();
     }
+    
     public void updateTblCustomers(){
          UpdateSearch up = new UpdateSearch("tblCustomer");
          rs = up.updateTable();
@@ -219,6 +222,9 @@ public class SearchCustomer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void hideNewReceiptButton(){
+        btnNewReceipt.setVisible(false);
+    }
     private void btnAddNewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewCustomerActionPerformed
 
         new CreateCustomer(this).setVisible(true);
@@ -259,7 +265,6 @@ public class SearchCustomer extends javax.swing.JFrame {
     }
     private void btnNewReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewReceiptActionPerformed
         int rowVal = tblCustomers.getSelectedRow();
-        System.out.print("rowVal= "+rowVal);
         if (rowVal != -1) {
 
             int custID = (int) tblCustomers.getValueAt(rowVal, 0);
@@ -273,6 +278,9 @@ public class SearchCustomer extends javax.swing.JFrame {
             if (mp != null){
             mp.populateCustomerDetails(custID, custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3);
             this.setVisible(false);
+            } else if(e != null){
+                e.populateCustomerDetails(custID, custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3);
+            this.setVisible(false);
             } else {
                 MainPane m = new MainPane();
                 m.populateCustomerDetails(custID, custName, custSurname, custContact, custEmail, custAddress1, custAddress2, custAddress3);
@@ -282,10 +290,7 @@ public class SearchCustomer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select an existing customer in the table below!");
         }
     }//GEN-LAST:event_btnNewReceiptActionPerformed
-    
-    
-     
-    
+
     private void btnViewRecDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecDelActionPerformed
         // TODO add your handling code here:
         new ArchiveViewer().setVisible(true);
@@ -307,7 +312,7 @@ public class SearchCustomer extends javax.swing.JFrame {
         if (reply == JOptionPane.YES_OPTION) {
             EditCustomers e= new EditCustomers (this);
             try{
-            e.sendEdits(tblCustomers);
+            e.sendEdits();
             }
             catch(Exception ex){
                 JOptionPane.showMessageDialog(null,ex);

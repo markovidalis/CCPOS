@@ -1,33 +1,20 @@
-
-import java.awt.BorderLayout;
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sourceforge.barbecue.Barcode;
-import net.sourceforge.barbecue.BarcodeException;
-import net.sourceforge.barbecue.BarcodeFactory;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author George
  */
 public class Dispatch extends javax.swing.JFrame {
-    Connection conn;
-    PreparedStatement pst;
-    String barcodeNum;
-    ResultSet rs;
-    
+
     /**
      * Creates new form Dispatch
      */
     public Dispatch() {
         initComponents();
-
     }
 
     /**
@@ -40,45 +27,25 @@ public class Dispatch extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtFieldDispatch = new javax.swing.JTextField();
-        btnDispatch = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        panelBarcode = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Order Dispatch");
 
-        txtFieldDispatch.setText("Scan Code...");
+        jTextField1.setText("Enter order number to be dispatched");
 
-        btnDispatch.setText("Dispatch");
-        btnDispatch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDispatchActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("NOTE @MARKATHESOUNDGUYMARKOUTHA: We must have a check in place here to see if the order is first completed before it can be dispatched ");
-
-        javax.swing.GroupLayout panelBarcodeLayout = new javax.swing.GroupLayout(panelBarcode);
-        panelBarcode.setLayout(panelBarcodeLayout);
-        panelBarcodeLayout.setHorizontalGroup(
-            panelBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
-        );
-        panelBarcodeLayout.setVerticalGroup(
-            panelBarcodeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 201, Short.MAX_VALUE)
-        );
-
-        jButton1.setText("Ready");
+        jButton1.setText("Dispatch");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("NOTE @MARKATHESOUNDGUYMARKOUTHA: We must have a check in place here to see if the order is first completed before it can be dispatched ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,38 +57,25 @@ public class Dispatch extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtFieldDispatch))
-                        .addGap(74, 74, 74)
-                        .addComponent(panelBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel2)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(panelBarcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(txtFieldDispatch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                            .addComponent(btnDispatch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(74, 74, 74)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(40, 40, 40))
         );
@@ -129,62 +83,9 @@ public class Dispatch extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDispatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispatchActionPerformed
-
-        barcodeNum = txtFieldDispatch.getText();
-        String status = "Dispatched";
-        updateOrderStatus(barcodeNum, status);
-// TODO add your handling code here:
-/*        String barcodeNumber= txtFieldDispatch.getText();
-        Barcode barcode= null;
-        
-        try {
-            barcode = BarcodeFactory.createCode128B(barcodeNumber);
-        } catch (BarcodeException e) {
-            // Error handling
-        }
-        panelBarcode.add(barcode, BorderLayout.CENTER);
-        panelBarcode.repaint();
-         */
-
-
-    }//GEN-LAST:event_btnDispatchActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        barcodeNum = txtFieldDispatch.getText();
-        String status = "Ready for dispatch";
-        updateOrderStatus(barcodeNum, status);
-        try {
-            String deliveryStatus= getDelivery(barcodeNum);
-        } catch (SQLException ex) {
-            Logger.getLogger(Dispatch.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-    public String getDelivery(String bar) throws SQLException{
-        String sql="SELECT delivery FROM tblReceipt WHERE barcodeNumber ="+bar;
-        conn=CCDBConnection.ConnectDB();
-        pst=conn.prepareStatement(sql);
-        rs =pst.executeQuery();
-        rs.next();
-        System.out.println(rs.getString(1));
-        return rs.getString(1);        
-        
-        
-        
-        
-    }
-    public void updateOrderStatus(String barcodeNum, String status) {
-        try {
-            String sql = "Update tblReceipt SET receiptStatus = '" + status + "' WHERE barcodeNumber =" + barcodeNum;
-            conn = CCDBConnection.ConnectDB();
-            pst = conn.prepareStatement(sql);
-            pst.execute();
-        } catch (SQLException ex) {
-            Logger.getLogger(Dispatch.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     /**
      * @param args the command line arguments
@@ -221,13 +122,10 @@ public class Dispatch extends javax.swing.JFrame {
         });
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDispatch;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel panelBarcode;
-    private javax.swing.JTextField txtFieldDispatch;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,9 @@ import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
 import java.io.*;
+import static java.lang.Thread.sleep;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -38,8 +41,9 @@ public final class NewReceiptClass {
     JTable tblItems;
     String[] columnNames = {"Qty", "Description", "Department", "Item Type", "Unit Price", "Total Price", "Notes"};
     JComboBox cmbDept, cmbItem;
+    String date, time;
     String[][] dept;
-    String[][] tableDataArr = new String[1][7];
+    String[][] tableDataArr = new String[0][7];
     int tableDataSize = 0;
 
     public NewReceiptClass(MainPane n, JComboBox cmbD, JComboBox cmbI, JTable tblCon) {
@@ -51,35 +55,90 @@ public final class NewReceiptClass {
         tblCon.setModel(new DefaultTableModel(data, columnNames));
         FillComboBoxDepartment();
         cmbItem = cmbI;
+        FillComboBoxItemType();
+
+    }
+
+    public void getDate() {
+        Calendar calenda = new GregorianCalendar();
+        int day = calenda.get(Calendar.DAY_OF_MONTH);
+        int month = calenda.get(Calendar.MONTH);
+        int year = calenda.get(Calendar.YEAR);
+
+        int hour = calenda.get(Calendar.HOUR);
+        String minute = calenda.get(Calendar.MINUTE) + "";
+
+        date = "" + day + "/" + month + "/" + year;
+
+        time = "" + hour + ":" + minute;
+
+        try {
+            sleep(1000);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
 
     }
 
     public void recordOrder() throws IOException {
+        getDate();
+
+        double tenderedAmount = 0;
+        double amount = 0;
+        String paymentMethod = "";
         String barcodeNum = generateBarcodeNumber();
         int empID = authenticateEmployee();
         try {
             if (empID != 0) {
                 String custID = nr.getCustomerID();
-                double amount = nr.getReceiptAmount();
-                String paymentMethod = nr.getPaymentMethod();
-                String sql = "INSERT INTO tblReceipt (custID, empID, receiptAmount, receiptPaymentMethod, delivery, receiptStatus, barcodeNumber)"
+                amount = nr.getReceiptAmount();
+                paymentMethod = nr.getPaymentMethod();
+
+                String sql = "INSERT INTO tblReceipt (custID, empID, receiptAmount, receiptPaymentMethod, delivery, receiptStatus, barcodeNumber, receiptDate, receiptTime)"
                         + " VALUES ('" + custID + "', '" + empID + "', '" + amount + "', '" + nr.getPaymentMethod() + "', '"
-                        + nr.getDelivery() + "', 'Being Processed', '" + barcodeNum + "')";
+                        + nr.getDelivery() + "', 'Being Processed', '" + barcodeNum + "', '" + date + "', '" + time + "')";
                 System.out.println(sql);
                 conn = CCDBConnection.ConnectDB();
                 pst = conn.prepareStatement(sql);
                 pst.execute();
-
-                JOptionPane.showMessageDialog(null, "Receipt recorded successfully: " + barcodeNum);
                 recordOrderItems(barcodeNum);
+                if (nr.getPaymentMethod().equals("Cash")) {
+                    tenderedAmount = Double.parseDouble(JOptionPane.showInputDialog("Enter Amount Tendered:"));
+                    JOptionPane.showMessageDialog(null, "Change: " + (tenderedAmount - amount));
+
+                }
+                //Step4Main.main(columnNames);
+                JOptionPane.showMessageDialog(null, "Receipt recorded successfully: " + barcodeNum);
             }
         } catch (SQLException sqle) {
             System.out.println("SQLError - recordReceipt" + sqle);
         }
+    }
+
+    public void voidItem(int row) {
+        if (tableDataArr.length > 0) {
+            String newData[][] = new String[tableDataArr.length - 1][tableDataArr[0].length];
+            int newCount = 0;
+            System.out.println("NewDAta size: " + newData.length + " Old data size: " + tableDataArr.length);
+            for (int i = 0; i < newData.length; i++) {
+                if (tableDataArr[i] != null) {
+                    System.out.println("Added item to array: " + tableDataArr[i][3].toString());
+                    newData[newCount] = tableDataArr[i];
+                    newCount++;
+                }
+            }
+            tableDataArr = new String[newData.length][newData[0].length];
+            tableDataArr = newData;
+            System.out.println("Array length " + tableDataArr.length);
+            tblItems.removeAll();
+            TableModel model2 = new DefaultTableModel(tableDataArr, columnNames);
+            tblItems.setModel(model2);
+
+        }
 
     }
-    
-  public String generateBarcodeNumber() {
+
+    public String generateBarcodeNumber() {
         String sql = "Select latestBarcode AS 'barNum' from tblBarNum";
         String barcodeNumber = "0000";
         try {
@@ -91,7 +150,7 @@ public final class NewReceiptClass {
                 barcodeNumber = String.format("%04d", Integer.parseInt(barcodeNumber) + 1);
                 System.out.println("BarcodeNumber = " + barcodeNumber);
                 Barcode barcode = null;
-                sql = "UPDATE tblBarNum SET latestBarcode = "+ barcodeNumber;
+                sql = "UPDATE tblBarNum SET latestBarcode = " + barcodeNumber;
                 conn = CCDBConnection.ConnectDB();
                 pst = conn.prepareStatement(sql);
                 pst.execute();
@@ -109,7 +168,7 @@ public final class NewReceiptClass {
         }
         return barcodeNumber;
     }
-  
+
     public void recordOrderItems(String barcodeNum) {
         String sql1 = "Select receiptID AS 'barNum' FROM tblReceipt where barcodeNumber = '" + barcodeNum + "'";
         try {
@@ -119,7 +178,7 @@ public final class NewReceiptClass {
             while (rs.next()) {
                 String receiptID = rs.getString("barNum");
                 JTable tblItems = nr.getTable();
-                System.out.println(tblItems.getRowCount()+"");
+                System.out.println(tblItems.getRowCount() + "");
                 for (int i = 0; i < tblItems.getRowCount(); i++) {
                     String qty = tblItems.getValueAt(i, 0).toString();
                     String desc = tblItems.getValueAt(i, 1).toString();
@@ -150,17 +209,17 @@ public final class NewReceiptClass {
 
     public void FillComboBoxItemType() {
         cmbItem.removeAllItems();
-        String deptName = cmbDept.getSelectedItem().toString();
-        int count = 0;
-        while (!dept[count][1].equals(deptName)) {
-            count++;
-        }
-        String deptID = dept[count][0];
+//        String deptName = cmbDept.getSelectedItem().toString();
+//        int count = 0;
+//        while (!dept[count][1].equals(deptName)) {
+//            count++;
+//        }
+//        String deptID = dept[count][0];
         try {
             int size = getRSSize("tblDeptItems");
             String[] items = new String[size + 1];
             items[0] = "";
-            String sql = "select * from tblDeptItems WHERE deptID = " + deptID;
+            String sql = "select * from tblDeptItems ORDER BY deptItemName";
             pst = conn.prepareStatement(sql);
 
             rs = pst.executeQuery();
@@ -180,7 +239,8 @@ public final class NewReceiptClass {
     public int getRSSize(String dbTblName) {
         int size;
         try {
-            String rsSize = "Select COUNT(*) AS 'size' from tblDeptItems";
+            conn = CCDBConnection.ConnectDB();
+            String rsSize = "Select COUNT(*) AS 'size' from checkdry_pos.tblDeptItems";
             pst = conn.prepareStatement(rsSize);
             rs = pst.executeQuery();
             rs.next();
@@ -193,12 +253,15 @@ public final class NewReceiptClass {
     }
 
     public void addItemToTable(JTextField txtQty, JTextField txtDesc, JTextField txtUnitP, JTextField txtTotalP, JTextArea txtNotes) {
+        tableDataSize = tableDataArr.length;
         String[][] newTblDataArr = new String[tableDataSize + 1][7];
         for (int i = 0; i < tableDataArr.length; i++) {
             for (int j = 0; j < 7; j++) {
                 newTblDataArr[i][j] = tableDataArr[i][j];
             }
         }
+        System.out.println("Array length " + tableDataArr.length);
+
         newTblDataArr[tableDataSize][0] = txtQty.getText();
         newTblDataArr[tableDataSize][1] = txtDesc.getText();
         newTblDataArr[tableDataSize][2] = cmbDept.getSelectedItem().toString();

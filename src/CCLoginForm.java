@@ -2,7 +2,6 @@
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -119,9 +118,6 @@ public class CCLoginForm extends javax.swing.JFrame {
                 MainPane mp = new MainPane();
                 mp.setVisible(true);
                 this.setVisible(false);
-            }
-            else {
-                JOptionPane.showMessageDialog(null, "Invalid details entered \n Try again");
             }
         } catch (SQLException ex) {
             Logger.getLogger(CCLoginForm.class.getName()).log(Level.SEVERE, null, ex);

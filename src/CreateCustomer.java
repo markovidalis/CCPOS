@@ -20,15 +20,9 @@ public class CreateCustomer extends javax.swing.JFrame {
         initComponents();
     }
     SearchCustomer sc;
-    MainPane mp;
-    Boolean lastPaneWasReceiptPane;
-
      public CreateCustomer(SearchCustomer s) {
-
         initComponents();
         sc = s;
-        lastPaneWasReceiptPane=false;
-        
     }
    
      
@@ -136,10 +130,10 @@ public class CreateCustomer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -159,7 +153,7 @@ public class CreateCustomer extends javax.swing.JFrame {
                             .addComponent(txtAddress1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtAddress2)
                             .addComponent(txtAddress3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel1)
@@ -236,12 +230,6 @@ public class CreateCustomer extends javax.swing.JFrame {
         return txtAddress3.getText();
     }
     
-    public void checkIfLastPaneWasRecieptPane(boolean value){
-        lastPaneWasReceiptPane=value;
-        System.out.print("it is now true");
-    }
-    
-    
     
     private void txtSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSurnameActionPerformed
         // TODO add your handling code here:
@@ -256,35 +244,17 @@ public class CreateCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAddress2ActionPerformed
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
-        CreateCustomerClassSearchPane ccc = new CreateCustomerClassSearchPane(this);
-        String acceptableCustomer= ccc.checkCustomerDetails();
-        
-        if (acceptableCustomer.equals("Legit")){
-         String cellNum= getContact();
-         
-            StringBuilder build= new StringBuilder (cellNum);
-            build.deleteCharAt(0);
-            cellNum= build.toString();
-            cellNum= "+27"+cellNum;
-            
-            ccc.updateNumer(cellNum);
-        boolean created = ccc.recordCustomer();
+        CreateCustomerClass cc = new CreateCustomerClass(this);
+        boolean created = cc.recordCustomer();
         if(created){
             JOptionPane.showMessageDialog(null, "Customer added successfully.");
             if(sc!=null){
                 sc.updateTblCustomers();
-                 this.setVisible(false);
-                }
-
             }
+            this.setVisible(false);
 
-        } //else {
+        } else {
             
-        //}
-        
-        
-        else{
-            JOptionPane.showMessageDialog(null, acceptableCustomer);
         }
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
@@ -349,8 +319,4 @@ public class CreateCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtSurname;
     // End of variables declaration//GEN-END:variables
-
-    void lastPaneWasReceiptPane(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
